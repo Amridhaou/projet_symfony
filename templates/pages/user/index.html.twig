@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+			padding: 20px;
+			font-family: 'Arial', sans-serif;
+			background-color: #f4f4f4;
+		}
+
+		h1 {
+			color: #28a745;
+		}
+
+		.container {
+			margin-top: 20px;
+		}
+
+		.table {
+			margin-top: 20px;
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		th, td {
+			padding: 12px;
+			text-align: left;
+			border-bottom: 1px solid #dee2e6;
+		}
+
+		th {
+			background-color: #28a745;
+			color: #28a745;
+		}
+
+		tbody tr:hover {
+			background-color: #e2e6ea;
+		}
+
+		.btn {
+			margin-top: 10px;
+		}
+
+		.mt-4 {
+			margin-top: 4px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyf4NBEi7TECOGKL/G9pOJ1UbsH/1JHM" crossorigin="anonymous">
+
+	<div class="mt-4 container">
+		<h1>Liste des clients</h1>
+
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Email</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Allergie</th>
+				<th>Téléphone</th>
+				<th>Date</th>
+				<th>Nbre de clients</th>
+				<th>Heure</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.email }}</td>
+					<td>{{ user.lastname }}</td>
+					<td>{{ user.firstname }}</td>
+					<td>{{ user.isAllergy ? 'Oui' : 'Non' }}</td>
+					<td>{{ user.phone }}</td>
+					<td>{{ user.date ? user.date|date('Y-m-d') : '' }}</td>
+					<td>{{ user.clientNumber }}</td>
+					<td>{{ user.time }}</td>
+					<td>
+						<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-success btn-sm">Voir</a>
+						<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">Pas d'enregistrement</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

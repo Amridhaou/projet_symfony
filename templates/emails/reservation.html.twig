@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Réservation Details</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyf4NBEi7TECOGKL/G9pOJ1UbsH/1JHM" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+	<h2>Réservation Details</h2>
+	<h3>
+		{{ user.firstname }} {{ user.lastname }} a réservé le {{ user.date ? user.date|date('d-m-Y') : '' }} pour {{ user.clientNumber }} personnes à {{ user.time }}
+	</h3>
+
+	<p class="mb-0">Allergie: {{ user.isAllergy ? 'Oui' : 'Non' }}</p>
+	<p class="mb-0">Téléphone: {{ user.phone }}</p>
+
+	<p class="mt-4">Cordialement,</p>
+	<p>Le Quai Antique</p>
+</div>
+
+<!-- Bootstrap JS and dependencies (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js" integrity="sha384-wMvyP9TVQCz5Vw+/F+5hYT8pt+MiDf2tvLiNcAC6GpZFrOZEFgfwjtnjY1FGPeFh" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyf4NBEi7TECOGKL/G9pOJ1UbsH/1JHM" crossorigin="anonymous"></script>
+</body>
+</html>

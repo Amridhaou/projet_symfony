@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une réservation{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+			padding: 20px;
+			font-family: 'Arial', sans-serif;
+			background-color: #f4f4f4;
+		}
+
+		h1 {
+			color: #343a40;
+		}
+
+		.container {
+			margin-top: 20px;
+		}
+
+		.card {
+			border: 1px solid #dee2e6;
+			border-radius: 8px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			margin-top: 20px;
+		}
+
+		.card-header {
+			background-color: #007bff;
+			color: #fff;
+			border-bottom: 0;
+			border-radius: 8px 8px 0 0;
+		}
+
+		.card-body {
+			padding: 20px;
+		}
+
+		.btn-update {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.btn-back {
+			background-color: #6c757d;
+			color: #fff;
+		}
+
+		.btn-delete {
+			background-color: #dc3545;
+			color: #fff;
+		}
+
+		.mt-4 {
+			margin-top: 20px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyf4NBEi7TECOGKL/G9pOJ1UbsH/1JHM" crossorigin="anonymous">
+
+	<div class="mt-4 container">
+		<h1>Modifier une réservation</h1>
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="mb-0">Formulaire de Modification</h5>
+			</div>
+			<div class="card-body">
+				{{ include('pages/reservation/_form.html.twig', {'button_label': 'Update'}) }}
+			</div>
+		</div>
+
+		<a class="btn btn-back btn-lg mt-4" href="{{ path('app_reservation_index') }}">Retour à la liste</a>
+
+		{{ include('pages/reservation/_delete_form.html.twig') }}
+	</div>
+{% endblock %}

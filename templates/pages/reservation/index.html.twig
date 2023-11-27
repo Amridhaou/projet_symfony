@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Réservations{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+			padding: 20px;
+			font-family: 'Arial', sans-serif;
+			background-color: #f8f9fa;
+		}
+
+		h1 {
+			color: #007bff;
+		}
+
+		.container {
+			margin-top: 20px;
+		}
+
+		.table {
+			margin-top: 20px;
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		th, td {
+			padding: 12px;
+			text-align: left;
+			border-bottom: 1px solid #dee2e6;
+		}
+
+		th {
+			background-color: #007bff;
+			color: #007bff;
+		}
+
+		tbody tr:hover {
+			background-color: #dee2e6;
+		}
+
+		.btn-create {
+			margin-top: 20px;
+			background-color: #28a745;
+			color: #fff;
+		}
+
+		.mt-4 {
+			margin-top: 20px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyf4NBEi7TECOGKL/G9pOJ1UbsH/1JHM" crossorigin="anonymous">
+
+	<div class="mt-4 container">
+		<h1>Liste des Réservations</h1>
+
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Date</th>
+				<th>Nbre de clients</th>
+				<th>Heure</th>
+				<th>Allergie</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for reservation in reservations %}
+				<tr>
+					<td>{{ reservation.date ? reservation.date|date('d-m-Y') : '' }}</td>
+					<td>{{ reservation.clientNumber }}</td>
+					<td>{{ reservation.time }}</td>
+					<td>{{ reservation.isAllergy ? 'Oui' : 'Non' }}</td>
+					<td>
+						<a class='btn btn-info mt-4' href="{{ path('app_reservation_show', {'id': reservation.id}) }}">
+							Voir
+						</a>
+
+						<a class='btn btn-warning mt-4 ms-4' href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">
+							Modifier
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Pas d'enregistrement</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+
+		<a class="btn btn-secondary btn-lg mt-4" href="{{ path('app_reservation_new') }}">
+			Créer une réservation
+		</a>
+	</div>
+{% endblock %}
