@@ -28,64 +28,43 @@
 		</thead>
 
 		<tbody>
-			{% for schedule in schedules %}
-				<tr>
-					<td>Lundi</td>
-					<td>{{ schedule.monday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evmonday }}</td>
-				</tr>
-				<tr>
-					<td>Mardi</td>
-					<td>{{ schedule.tuesday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evtuesday }}</td>
-				</tr>
-				<tr>
-					<td>Mercredi</td>
-					<td>{{ schedule.wednesday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evwednesday }}</td>
-				</tr>
-				<tr>
-					<td>Jeudi</td>
-					<td>{{ schedule.thursday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evthursday }}</td>
-				</tr>
-				<tr>
-					<td>Vendredi</td>
-					<td>{{ schedule.friday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evfriday }}</td>
-				</tr>
-				<tr>
-					<td>Samedi</td>
-					<td>{{ schedule.saturday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evsaturday }}</td>
-				</tr>
-				<tr>
-					<td>Dimanche</td>
-					<td>{{ schedule.sunday }}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>{{ schedule.evsunday }}</td>
-				</tr>
-			{% endfor %}
+		{% for schedule in schedules %}
+			<tr>
+				<td>Lundi</td>
+				<td>{{ schedule.monday }}</td>
+			</tr>
+
+			<tr>
+				<td>Mardi</td>
+				<td>{{ schedule.tuesday }}</td>
+			</tr>
+
+			<tr>
+				<td>Mercredi</td>
+				<td>{{ schedule.wednesday }}</td>
+			</tr>
+
+			<tr>
+				<td>Jeudi</td>
+				<td>{{ schedule.thursday }}</td>
+			</tr>
+
+			<tr>
+				<td>Vendredi</td>
+				<td>{{ schedule.friday }}</td>
+			</tr>
+
+			<tr>
+				<td>Samedi</td>
+				<td>{{ schedule.saturday }}</td>
+			</tr>
+
+			<tr>
+				<td>Dimanche</td>
+				<td>{{ schedule.sunday }}</td>
+			</tr>
+
+		{% endfor %}
 
 		</tbody>
 	</table>
