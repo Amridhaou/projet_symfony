@@ -22,4 +22,20 @@ class HomeController extends AbstractController
             'schedules'=>$scheduleRepository->findAll(),
         ]);
     }
+    #[Route('/contact', name: 'home.contact')]
+    public function contact(MealRepository $mealRepository, ScheduleRepository $scheduleRepository): Response
+    {
+        return $this->render('temp/contact.html.twig', [
+            'controller_name' => 'HomeController',
+
+        ]);
+    }
+    #[Route('/about', name: 'home.about')]
+    public function about(MealRepository $mealRepository, ScheduleRepository $scheduleRepository): Response
+    {
+        return $this->render('temp/about.html.twig', [
+            'controller_name' => 'HomeController',
+
+        ]);
+    }
 }

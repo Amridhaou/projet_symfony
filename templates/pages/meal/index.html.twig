@@ -1,59 +1,263 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste de plats
-{% endblock %}
+{% block title %}Liste des catégories{% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
-		<h1>Liste de plats</h1>
+	<style>
+		body {
+			padding: 20px;
+			font-family: 'Arial', sans-serif;
+			background-color: #f8f9fa;
+		}
 
-		<table class="table">
-			<thead>
-				<tr>
+		h1 {
+			color: #007bff;
+		}
 
-					<th>Nom</th>
-					<th>Description</th>
-					<th>Prix</th>
-					<th>Images</th>
-					<th>actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for meal in meals %}
-					<tr>
+		.container {
+			margin-top: 20px;
+			padding-top: inherit;
+		}
 
-						<td>{{ meal.title }}</td>
-						<td>{{ meal.description }}</td>
-						<td>{{ meal.price }}
-							€</td>
-						<td>{{ meal.picture }}</td>
-						<td>
-							<a href="{{ path('app_meal_show', {'id': meal.id}) }}" class=' mt-4'>
+		.table {
+			margin-top: 20px;
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
 
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewbox="0 0 16 16">
-									<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-									<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-								</svg>
-							</a>
+		th, td {
+			padding: 12px;
+			text-align: left;
+			border-bottom: 1px solid #dee2e6;
+		}
 
-							<a href="{{ path('app_meal_edit', {'id': meal.id}) }}" class='mt-4 ms-4'>
+		th {
+			background-color: #007bff;
+			color: #007bff;
+		}
 
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewbox="0 0 16 16">
-									<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-								</svg>
-							</a>
+		tbody tr:hover {
+			background-color: #dee2e6;
+		}
 
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="6">Pas de plats</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		.btn {
+			margin-top: 20px;
+		}
 
-		<a href="{{ path('app_meal_new') }}">Créer un nouveau plat</a>
+		.btn-info {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.btn-warning {
+			background-color: #ffc107;
+			color: #212529;
+		}
+
+		.mt-4 {
+			margin-top: 20px;
+		}
+		.panel{
+			font-family: 'Raleway', sans-serif;
+			padding: 0;
+			border: none;
+			box-shadow: 0 0 10px rgba(0,0,0,0.08);
+		}
+		.panel .panel-heading{
+			background: #535353;
+			padding: 15px;
+			border-radius: 0;
+		}
+		.panel .panel-heading .btn{
+			color: #fff;
+			background-color: #000;
+			font-size: 14px;
+			font-weight: 600;
+			padding: 7px 15px;
+			border: none;
+			border-radius: 0;
+			transition: all 0.3s ease 0s;
+		}
+		.panel .panel-heading .btn:hover{ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+		.panel .panel-heading .form-horizontal .form-group{ margin: 0; }
+		.panel .panel-heading .form-horizontal label{
+			color: #fff;
+			margin-right: 10px;
+		}
+		.panel .panel-heading .form-horizontal .form-control{
+			display: inline-block;
+			width: 80px;
+			border: none;
+			border-radius: 0;
+		}
+		.panel .panel-heading .form-horizontal .form-control:focus{
+			box-shadow: none;
+			border: none;
+		}
+		.panel .panel-body{
+			padding: 0;
+			border-radius: 0;
+		}
+		.panel .panel-body .table thead tr th{
+			color: #fff;
+			background: #8D8D8D;
+			font-size: 17px;
+			font-weight: 700;
+			padding: 12px;
+			border-bottom: none;
+		}
+		.panel .panel-body .table thead tr th:nth-of-type(1){ width: 120px; }
+		.panel .panel-body .table thead tr th:nth-of-type(3){ width: 50%; }
+		.panel .panel-body .table tbody tr td{
+			color: #555;
+			background: #fff;
+			font-size: 15px;
+			font-weight: 500;
+			padding: 13px;
+			vertical-align: middle;
+			border-color: #e7e7e7;
+		}
+		.panel .panel-body .table tbody tr:nth-child(odd) td{ background: #f5f5f5; }
+		.panel .panel-body .table tbody .action-list{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		.panel .panel-body .table tbody .action-list li{ display: inline-block; }
+		.panel .panel-body .table tbody .action-list li a{
+			color: #fff;
+			font-size: 13px;
+			line-height: 28px;
+			height: 28px;
+			width: 33px;
+			padding: 0;
+			border-radius: 0;
+			transition: all 0.3s ease 0s;
+		}
+		.panel .panel-body .table tbody .action-list li a:hover{ box-shadow: 0 0 5px #ddd; }
+		.panel .panel-footer{
+			color: #fff;
+			background: #535353;
+			font-size: 16px;
+			line-height: 33px;
+			padding: 25px 15px;
+			border-radius: 0;
+		}
+		.pagination{ margin: 0; }
+		.pagination li a{
+			color: #fff;
+			background-color: rgba(0,0,0,0.3);
+			font-size: 15px;
+			font-weight: 700;
+			margin: 0 2px;
+			border: none;
+			border-radius: 0;
+			transition: all 0.3s ease 0s;
+		}
+		.pagination li a:hover,
+		.pagination li a:focus,
+		.pagination li.active a{
+			color: #fff;
+			background-color: #000;
+			box-shadow: 0 0 5px rgba(0,0,0,0.4);
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyf4NBEi7TECOGKL/G9pOJ1UbsH/1JHM" crossorigin="anonymous">
+	<div class="container ">
+		<h1>Liste des catégories</h1>
+
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<div class="panel">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<form class="form-horizontal pull-right">
+									<div class="form-group">
+										<label>Show : </label>
+										<select class="form-control">
+											<option>5</option>
+											<option>10</option>
+											<option>15</option>
+											<option>20</option>
+										</select>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body table-responsive">
+
+
+
+						<div class="panel-body table-responsive">
+							<table class="table">
+								<thead>
+								<tr>
+
+									<th>Nom</th>
+									<th>Description</th>
+									<th>Prix</th>
+									<th>Images</th>
+									<th>actions</th>
+								</tr>
+								</thead>
+								<tbody>
+								{% for meal in meals %}
+									<tr>
+
+										<td>{{ meal.title }}</td>
+										<td>{{ meal.description }}</td>
+										<td>{{ meal.price }}
+											€</td>
+										<td><img src="{{ meal.picture }}"></td>
+										<td>
+
+
+
+											<ul class="action-list">
+												<li><a href="{{ path('app_meal_edit', {'id': meal.id}) }}" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a></li>
+												<li><a href="{{ path('app_meal_show', {'id': meal.id}) }}" class="btn btn-danger"><i class="fa fa-users-viewfinder"></i></a></li></ul>
+
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="6">Pas de plats</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-xs-6">showing <b>5</b> out of <b>25</b> entries</div>
+							<div class="col-sm-6 col-xs-6">
+								<ul class="pagination hidden-xs pull-right">
+									<li><a href="#">«</a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">»</a></li>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+					<a class="btn btn-primary btn-lg mt-4" href="{{ path('app_meal_new') }}">Créer un nouveau plat</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	</div>
 
 {% endblock %}
