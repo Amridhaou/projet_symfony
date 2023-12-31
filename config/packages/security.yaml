@@ -34,8 +34,7 @@ security:
     - { path: ^/categorie, roles: ROLE_ADMIN }
     - { path: ^/horaire_midi, roles: ROLE_ADMIN }
     - { path: ^/horaire_soir, roles: ROLE_ADMIN }
-    - { path: ^/reservation, roles: ROLE_ADMIN }
-    - { path: ^/reservation, roles: ROLE_CLIENT }
+    - { path: ^/reservation, roles: [ROLE_ADMIN, ROLE_CLIENT] }
     # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
