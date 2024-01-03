@@ -4,27 +4,45 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des Menus</h1>
+   <style>
+   img{
+   width: 90px;
+   			height: 90px;
+   }
+    </style>
 
-	{% for menu in menus %}
-		<div class="container">
-			<h2 class="text-center mt-4 text-decoration-underline">{{ menu.title }}</h2>
+    <h1 class="text-center">Liste des Menus</h1>
 
-			{% for option in menu.options %}
+    {% for menu in menus %}
+        <div class="container mt-4">
+            <h2 class="text-center text-decoration-underline">{{ menu.title }}</h2>
 
-				<h3 class="text-center">{{ option.title }}</h3>
+            <div class="row">
+                {% for option in options %}
+                    {% if option.id == menu.Id %}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-center">{{ option.description }}</h3>
+                                    <h4 class="card-subtitle text-center">{{ option.day }}</h4>
+                                    <p class="card-text text-center">{{ option.price }} dt </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+<div class="card mb-4">
+ <div class="card-body">
+<img src="{{ asset('assets/images/') ~ 'photo' ~ option.id ~ '.jpg' }}">
+</div>
+ </div>
+</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
-				<h4 class="text-center">{{ option.day }}</h4>
-
-				<p class="text-center">{{ option.description }}
-
-					{{ option.price }}</p>
-
-
-			{% endfor %}
-			<hr class="m-4">
-		</div>
-	{% endfor %}
+            <hr class="m-4">
+        </div>
+    {% endfor %}
 
 	<div class="text-center">
 		<a href="{{ path ('app_reservation_new') }}" class="btn btn-primary mt-4">Réserver une table</a>

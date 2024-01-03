@@ -26,10 +26,11 @@ class MenuController extends AbstractController
     }
 
      #[Route('/formule', name: 'app_menuformule_index', methods: ['GET'])]
-    public function indexformule(MenuRepository $menuRepository, ScheduleRepository $scheduleRepository): Response
+    public function indexformule(MenuRepository $menuRepository, ScheduleRepository $scheduleRepository,OptionRepository $optionRepository): Response
     {
         return $this->render('pages/menu/indexformule.html.twig', [
             'menus' => $menuRepository->findAll(),
+            'options' => $optionRepository->findAll(),
             'schedules'=>$scheduleRepository->findAll(),
         ]);
     }
